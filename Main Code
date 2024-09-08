@@ -1,0 +1,105 @@
+const express = require('express')
+const { number } = require('xpress/lib/string')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+  }) 
+
+app.get('/Yesno', (req, res) => {
+    let randomNumber = Math.floor(Math.random() * 10) + 1;
+    console.log(randomNumber);
+
+    if (randomNumber <= 4) {
+        var data = {"answer": "yes"}
+        res.json(data);
+
+    }   else if (randomNumber >= 5 && randomNumber <= 8) {
+            var data = {"answer": "no"}
+            res.json(data);
+    
+    }   else if (randomNumber == 9 || randomNumber == 10) {
+            var data = {"answer": "maybe"}
+            res.json(data);
+    }   
+});
+
+let counter = 0;
+app.get('/RGB', (req, res) => {
+    let rgb_Number = Math.floor(Math.random() * 30) + 1;
+    let data;
+    
+    if (counter == 8){
+        data = {"answer": "Your colors made: yellow🟡"}
+        res.json(data);
+        counter = 0;
+    } else if (counter == 10){
+        data = {"answer": "Your colors made: violet🟣"}
+        res.json(data);
+        counter = 0;
+    } else if (counter == 12){
+        data = {"answer": "Your colors made: turquoise🩵"}
+        res.json(data);
+        counter = 0; 
+    } else if (counter == 11){
+        data = {"answer": "Wow Rainbow 🌈"}
+        res.json(data);
+        counter = 0;
+    } else {
+
+// ________________________________________________________________________________________ 
+
+    
+        if (rgb_Number <= 5) {
+            data = {"answer": "Red🔴 and Green🟢"}
+            counter = 0;
+            counter += 8;
+        } else if (rgb_Number >= 6 && rgb_Number <= 9){
+            data = {"answer": "Red🔴 and Blue🔵"}
+            counter = 0;
+            counter += 10;
+        }
+     
+    
+    
+// ________________________________________________________________________________________
+
+        if (rgb_Number >= 11 && rgb_Number <= 15) {
+            data = {"answer": "Green🟢 and Red🔴"}
+            counter = 0;
+            counter += 8;
+        } 
+        else if (rgb_Number >= 16 && rgb_Number <= 19) {
+            data = {"answer": "Green🟢 and Blue🔵"}
+            counter = 0;
+            counter += 12;
+        } 
+      
+    
+// ________________________________________________________________________________________      
+    
+        if (rgb_Number >= 21 && rgb_Number <= 25) {
+            data = {"answer": "Blue🔵 and Green🟢"}
+            counter = 0;
+            counter += 12;
+        }        
+        else if (rgb_Number >= 26 && rgb_Number <= 29) {
+            data = {"answer": " Blue🔵 and Red🔴"}
+            counter = 0;
+            counter += 10;
+        }
+// ________________________________________________________________________________________     
+    
+        if (rgb_Number == 10 || rgb_Number == 20 || rgb_Number == 30) {
+            data = {"answer": "Red🔴, Green🟢, Blue🔵"}
+            counter = 0;
+            counter += 11;
+        }
+    }
+    res.json(data);
+  });
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+
